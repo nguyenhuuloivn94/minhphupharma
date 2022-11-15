@@ -10,6 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@ant-design/plots": "^1.2.2",
     "@reduxjs/toolkit": "^1.9.0",
     "antd": "^4.24.2",
     "axios": "^1.1.3",
