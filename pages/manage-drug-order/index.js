@@ -1,6 +1,6 @@
 import { Card, Typography, Table, Input } from "antd";
 const { Title } = Typography;
-import DrugOrderColumn from "components/ManageDrugOrder/DrugOrder.column";
+import DrugOrderColumn from "components/ManageDrugOrder/DrugOrderColumn";
 
 export default function ManageDrugOrder() {
   const dataSource = [

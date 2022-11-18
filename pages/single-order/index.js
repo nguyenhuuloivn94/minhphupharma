@@ -2,7 +2,7 @@ import { Card, Col, Input, Row, Switch, Table, Button } from "antd";
 import { WalletOutlined } from "@ant-design/icons";
 import fontSize from "theme/fontSize";
 import SelectPaging from "components/Common/SelectPaging";
-import OrderColumns from "components/SingleOrder/Order.column";
+import OrderColumns from "components/SingleOrder/OrderColumn";
 import color from "theme/color";
 import { formatMoney } from "utils/helperCenter";
 import Styles from "./SingleOrder.module.css";
