@@ -1,4 +1,8 @@
-import { Layout, Menu, notification } from "antd";
+import { Drawer, Menu, notification } from "antd";
+import React, { useState, forwardRef, useImperativeHandle } from "react";
+import fontSize from "theme/fontSize";
+import color from "theme/color";
+import { useRouter } from "next/router";
 import {
   DatabaseOutlined,
   FolderOpenOutlined,
@@ -7,15 +11,8 @@ import {
   MedicineBoxOutlined,
   SolutionOutlined,
 } from "@ant-design/icons";
-import React, { useState } from "react";
-import fontSize from "theme/fontSize";
-import color from "theme/color";
-import { useRouter } from "next/router";
-import Styles from "./SideBar.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { addSelectedKey, addOpenKey } from "store/reducer/sider.reducer";
-
-const { Sider } = Layout;
 
 function getItem(label, key, icon, children) {
   return {
@@ -53,24 +50,39 @@ const menuData = [
   getItem("Quản lý tài khoản", "9", <SolutionOutlined />),
 ];
 
-export default ({ smallScreen }) => {
-  const router = useRouter();
+const DrawerSider = ({}, ref) => {
   const dispatch = useDispatch();
   const siderPicker = useSelector((state) => state.reducers.sider);
+  const [open, setOpen] = useState(false);
+  const router = useRouter();
+
+  useImperativeHandle(ref, () => ({
+    show: () => showDrawer(),
+    hide: () => onClose(),
+  }));
+
+  const showDrawer = () => {
+    setOpen(true);
+  };
+
+  const onClose = () => {
+    setOpen(false);
+  };
 
   const handleSelectMenu = (e) => {
     const { key } = e;
     const route = routesData.find((r) => r.key === key)?.route;
-    console.log(route);
     if (route) {
       setSelectedKey([key]);
       router.push(route);
+      onClose();
     } else {
       notification.error({ message: "Menu chưa được thiết lập", duration: 1 });
     }
   };
 
   const goDashBoard = () => {
+    onClose();
     setSelectedKey([]);
     setOpenKey([]);
     router.replace("/dashboard");
@@ -87,50 +99,46 @@ export default ({ smallScreen }) => {
   };
 
   return (
-    <Sider
-      theme={"light"}
-      breakpoint="xl"
-      collapsedWidth="0"
-      trigger={null}
-      onBreakpoint={(broken) => {
-        console.log(broken);
-      }}
-      onCollapse={(collapsed, type) => {
-        console.log(collapsed, type);
-      }}
-      style={{
-        position: "fixed",
-        left: 0,
-        top: 0,
-        bottom: 0,
-        zIndex: 9999,
-      }}
-    >
-      <div
-        className={Styles.name_branch}
-        style={{
-          fontSize: fontSize.medium,
-          color: color.navyBlue,
-        }}
-        onClick={goDashBoard}
-      >
-        Minh Phú Pharmacy
-      </div>
-      {!smallScreen ? (
-        <Menu
-          mode="inline"
-          selectedKeys={siderPicker?.selectedKey}
-          openKeys={siderPicker?.openKey}
+    <Drawer
+      title={
+        <div
           style={{
-            height: "100%",
+            fontSize: fontSize.medium,
+            color: color.navyBlue,
+            padding: 16,
+            cursor: "pointer",
+            width: "fit-content",
           }}
-          items={menuData}
-          onSelect={handleSelectMenu}
-          onOpenChange={(e) => {
-            setOpenKey(e);
-          }}
-        />
-      ) : null}
-    </Sider>
+          onClick={goDashBoard}
+        >
+          Minh Phú Pharmacy
+        </div>
+      }
+      placement="left"
+      closable={false}
+      onClose={onClose}
+      open={open}
+      getContainer={false}
+      style={{
+        position: "absolute",
+      }}
+      headerStyle={{ padding: 0 }}
+      bodyStyle={{ padding: 0 }}
+    >
+      <Menu
+        mode="inline"
+        selectedKeys={siderPicker?.selectedKey}
+        openKeys={siderPicker?.openKey}
+        style={{
+          height: "100%",
+        }}
+        items={menuData}
+        onSelect={handleSelectMenu}
+        onOpenChange={(e) => {
+          setOpenKey(e);
+        }}
+      />
+    </Drawer>
   );
 };
+export default forwardRef(DrawerSider);

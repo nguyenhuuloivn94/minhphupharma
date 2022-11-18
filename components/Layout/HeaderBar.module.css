@@ -1,0 +1,9 @@
+.button_custom {
+  cursor: pointer;
+  min-width: 12rem;
+  padding: 4px;
+}
+
+.button_custom:hover {
+  background-color: #f0f3f8;
+}

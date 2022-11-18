@@ -1,28 +1,53 @@
 import { Layout } from "antd";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import SideBar from "./SideBar";
 import color from "theme/color";
 import useWindowSize from "hook/useWindowSize";
 import HeaderBar from "./HeaderBar";
+import DrawerSider from "./DrawerSider";
 
 const { Content, Footer } = Layout;
 
 export default ({ children }) => {
+  const drawerSiderRef = useRef(null);
   const size = useWindowSize();
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    if (size.smallScreen) {
+    } else {
+      drawerSiderRef.current?.hide();
+    }
+  }, [size.smallScreen]);
+
+  const openDrawSider = () => {
+    drawerSiderRef.current?.show();
+  };
+
+  const closeDrawSider = () => {
+    drawerSiderRef.current?.hide();
+  };
 
   return (
     <div>
       <Layout style={{ minHeight: "100vh" }}>
-        <SideBar />
+        <SideBar smallScreen={size.smallScreen} />
         <Layout
           style={{
-            marginLeft: size.width < 1200 ? 0 : 200,
+            marginLeft: size.smallScreen ? 0 : 200,
           }}
         >
-          <HeaderBar />
-          <Content style={{ margin: "24px 16px 0", overflow: "initial" }}>
+          <HeaderBar
+            onOpenDrawSider={openDrawSider}
+            onCloseDrawSider={closeDrawSider}
+            smallScreen={size.smallScreen}
+          />
+          <Content
+            style={{
+              margin: "24px 16px 0",
+              overflow: "initial",
+              backgroundColor: color.bgContent,
+            }}
+          >
             {children}
           </Content>
           <Footer
@@ -37,6 +62,8 @@ export default ({ children }) => {
           </Footer>
         </Layout>
       </Layout>
+
+      <DrawerSider ref={drawerSiderRef} />
     </div>
   );
 };
