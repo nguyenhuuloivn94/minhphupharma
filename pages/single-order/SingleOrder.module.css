@@ -1,0 +1,8 @@
+.title_payment_block {
+  color: white;
+  padding: 2px 8px;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  height: 32px;
+}

@@ -1,5 +1,5 @@
 import "../styles/globals.css";
-import { wrapper } from "./../redux/reducer";
+import { wrapper } from "../store/reducer";
 import { Provider } from "react-redux";
 import Layout from "components/Layout/Index";
 

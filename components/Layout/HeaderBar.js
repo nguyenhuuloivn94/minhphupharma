@@ -1,35 +1,72 @@
-import { Popover, Layout, Button, Row, Col, Space } from "antd";
+import {
+  Popover,
+  Layout,
+  Button,
+  Row,
+  Col,
+  Space,
+  Avatar,
+  Divider,
+} from "antd";
 import React from "react";
 import color from "theme/color";
-import { DownOutlined } from "@ant-design/icons";
+import { UserOutlined, PicRightOutlined } from "@ant-design/icons";
+import Styles from "./HeaderBar.module.css";
+
 const { Header } = Layout;
 
-const content = (
-  <div>
-    <Button>Rđasadsadasda sdsaB</Button>
-  </div>
-);
+const ItemContent = ({ title, icon }) => {
+  return (
+    <div className={Styles.button_custom}>
+      {icon} {title}
+    </div>
+  );
+};
+
+const content = () => {
+  return (
+    <>
+      <ItemContent title="Tài khoản" icon={<UserOutlined />} />
+      <Divider style={{ margin: "8px 0px" }} />
+      <ItemContent title="Đăng xuất" icon={<UserOutlined />} />
+    </>
+  );
+};
 
 export default (props) => {
+  const { smallScreen } = props;
+  const { onOpenDrawSider, onCloseDrawSider } = props;
   return (
     <Header className="header-bar" style={{ backgroundColor: color.bg }}>
       <Row>
-        <Col span={22}></Col>
+        <Col span={22}>
+          {smallScreen ? (
+            <Button
+              onClick={onOpenDrawSider}
+              icon={<PicRightOutlined />}
+            ></Button>
+          ) : null}
+        </Col>
         <Col span={2}>
           <Space
             style={{
               display: "flex",
               justifyContent: "flex-end",
               alignItems: "center",
+              cursor: "pointer",
             }}
           >
             <Popover
+              style={{ backgroundColor: color.ghostWhite }}
               placement="bottomRight"
               // title={text}
               content={content}
               trigger="click"
             >
-              <Button>RB</Button>
+              <Avatar
+                style={{ backgroundColor: "#87d068" }}
+                icon={<UserOutlined />}
+              />
             </Popover>
           </Space>
         </Col>

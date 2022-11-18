@@ -35,3 +35,16 @@ a {
 .ant-popover-placement-bottomRight {
   padding-top: 0px !important;
 }
+
+.ant-layout-sider-zero-width-trigger {
+  top: 12px !important;
+  background-color: #f8f9fc !important;
+}
+
+.ant-layout-sider-zero-width-trigger:hover {
+  background-color: #cdd6e8 !important;
+}
+
+.header-bar {
+  padding: 0px 16px !important;
+}

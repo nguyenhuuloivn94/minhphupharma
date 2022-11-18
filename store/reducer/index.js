@@ -1,18 +1,18 @@
 import config from "./config.reducer";
+import sider from "./sider.reducer";
 
 import { combineReducers } from "redux";
 import { configureStore } from "@reduxjs/toolkit";
-import { MakeStore, createWrapper, Context } from "next-redux-wrapper";
+import { createWrapper } from "next-redux-wrapper";
 
 const appReducer = combineReducers({
   config,
+  sider,
 });
 
 const reducers = (state, action) => {
   return appReducer(state, action);
 };
-
-export default reducers;
 
 const makeStore = () =>
   configureStore({

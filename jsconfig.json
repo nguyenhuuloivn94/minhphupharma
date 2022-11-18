@@ -6,6 +6,6 @@
     "@/components/*": ["components/*"],
     "@/theme/*": ["theme/*"],
     "@/hook/*": ["hook/*"],
-    "@/redux/*": ["redux/*"]
+    "@/store/*": ["store/*"]
   }
 }
