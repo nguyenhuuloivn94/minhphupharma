@@ -1,5 +1,6 @@
 import { Modal, Row, Col, Divider } from "antd";
 import { useMemo, Fragment, useEffect, useState } from "react";
+import FormSingleOrder from "components/SingleOrder/FormSingleOrder";
 
 const UpdateSingleOrderModal = ({
   isShowUpdateSingleOrderModal,
@@ -8,14 +9,17 @@ const UpdateSingleOrderModal = ({
   return (
     <Modal
       centered={true}
-      visible={isShowUpdateSingleOrderModal}
-      title={`Xem tổng danh mục`}
+      open={isShowUpdateSingleOrderModal}
+      title={`Cập nhật đơn hàng`}
       onCancel={closeUpdateSingleOrderModal}
       footer={null}
-      bodyStyle={{ overflowX: "scroll", height: 800 }}
-      style={{ zIndex: 99999999 }}
-      width={960}
-    ></Modal>
+      bodyStyle={{ overflowX: "scroll", height: 800, zIndex: 1024 }}
+      maskStyle={{ zIndex: 1024 }}
+      style={{ zIndex: 1024 }}
+      width={'90%'}
+    >
+      <FormSingleOrder />
+    </Modal>
   );
 };
 

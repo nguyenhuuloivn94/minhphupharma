@@ -33,7 +33,7 @@ const content = () => {
   );
 };
 
-export default (props) => {
+const HeaderBar = (props) => {
   const { smallScreen } = props;
   const { onOpenDrawSider, onCloseDrawSider } = props;
   return (
@@ -74,3 +74,5 @@ export default (props) => {
     </Header>
   );
 };
+
+export default HeaderBar;

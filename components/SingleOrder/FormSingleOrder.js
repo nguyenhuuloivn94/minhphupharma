@@ -37,7 +37,7 @@ export default function FormSingleOrder() {
   return (
     <div>
       <Card>
-        <SelectPaging />
+        <SelectPaging placeHolder="Tìm kiếm thuốc theo tên, mã, mã vạch" />
       </Card>
       <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
         <Col xs={24} lg={24} xl={12}>
