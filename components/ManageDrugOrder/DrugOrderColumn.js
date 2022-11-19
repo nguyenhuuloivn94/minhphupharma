@@ -1,9 +1,9 @@
-import { Button, Tag, } from "antd";
+import { Button, Tag } from "antd";
 import { EditOutlined } from "@ant-design/icons";
 import color from "theme/color";
 import { formatMoney, formatDateWithMoment } from "utils/helperCenter";
 
-const OrderColumns = () => {
+const OrderColumns = ({ openUpdateSingleOrderModal = () => {} }) => {
   const columns = [
     {
       title: "STT",
@@ -100,7 +100,13 @@ const OrderColumns = () => {
       width: 30,
       key: "action",
       render: () => {
-        return <Button type="ghost" icon={<EditOutlined />}></Button>;
+        return (
+          <Button
+            onClick={() => openUpdateSingleOrderModal()}
+            type="ghost"
+            icon={<EditOutlined />}
+          ></Button>
+        );
       },
     },
   ];

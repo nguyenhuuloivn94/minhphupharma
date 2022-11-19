@@ -2,7 +2,12 @@ import { Card, Typography, Table, Input } from "antd";
 const { Title } = Typography;
 import DrugOrderColumn from "components/ManageDrugOrder/DrugOrderColumn";
 
+import UpdateSingleOrderModal from "components/ManageDrugOrder/UpdateSingleOrderModal";
+import { use, useState } from "react";
+
 export default function ManageDrugOrder() {
+  const [showUpdateSingleOrderModal, setShowUpdateSingleOrderModal] =
+    useState(false);
   const dataSource = [
     {
       key: "1",
@@ -32,7 +37,7 @@ export default function ManageDrugOrder() {
             alignItems: "center",
           }}
         >
-          <Title level={5}>Quản lý đơn hàng thuốc</Title>
+          <Title level={5}>Danh sách đơn hàng</Title>
           <Input style={{ width: 300 }} placeholder={"Mã đơn hàng, tên dược"} />
         </div>
         <Table
@@ -48,13 +53,21 @@ export default function ManageDrugOrder() {
             y: 300,
           }}
           dataSource={dataSource}
-          columns={DrugOrderColumn()}
+          columns={DrugOrderColumn({
+            openUpdateSingleOrderModal: () => {
+              setShowUpdateSingleOrderModal(true);
+            },
+          })}
           onChange={(e) => {
             console.log("🚀 - ManageDrugOrder - e", e);
             return;
           }}
         />
       </Card>
+      <UpdateSingleOrderModal
+        isShowUpdateSingleOrderModal={showUpdateSingleOrderModal}
+        closeUpdateSingleOrderModal={() => setShowUpdateSingleOrderModal(false)}
+      />
     </div>
   );
 }
