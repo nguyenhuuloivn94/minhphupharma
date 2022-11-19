@@ -1,14 +1,15 @@
-import { Layout } from "antd";
+import { BackTop, Button, Layout } from "antd";
 import React, { useEffect, useRef } from "react";
 import SideBar from "./SideBar";
 import color from "theme/color";
 import useWindowSize from "hook/useWindowSize";
 import HeaderBar from "./HeaderBar";
 import DrawerSider from "./DrawerSider";
+import { CaretUpOutlined } from "@ant-design/icons";
 
 const { Content, Footer } = Layout;
 
-export default ({ children }) => {
+const LayoutComponent = ({ children }) => {
   const drawerSiderRef = useRef(null);
   const size = useWindowSize();
 
@@ -25,6 +26,17 @@ export default ({ children }) => {
 
   const closeDrawSider = () => {
     drawerSiderRef.current?.hide();
+  };
+
+  const style = {
+    height: 40,
+    width: 40,
+    lineHeight: "40px",
+    borderRadius: 4,
+    backgroundColor: "#1088e9",
+    color: "#fff",
+    textAlign: "center",
+    fontSize: 14,
   };
 
   return (
@@ -64,6 +76,15 @@ export default ({ children }) => {
       </Layout>
 
       <DrawerSider ref={drawerSiderRef} />
+      <BackTop>
+        <Button
+          shape="circle"
+          style={{ background: "rgba(0,0,0,0.3)", border: "none" }}
+          icon={<CaretUpOutlined style={{ color: "rgba(0,0,0,0.5)" }} />}
+        ></Button>
+      </BackTop>
     </div>
   );
 };
+
+export default LayoutComponent;

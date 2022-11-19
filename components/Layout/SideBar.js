@@ -7,7 +7,7 @@ import {
   MedicineBoxOutlined,
   SolutionOutlined,
 } from "@ant-design/icons";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import fontSize from "theme/fontSize";
 import color from "theme/color";
 import { useRouter } from "next/router";
@@ -30,10 +30,12 @@ const routesData = [
   {
     key: "1",
     route: "/single-order",
+    sub: "sub1",
   },
   {
     key: "3",
     route: "/manage-drug-order",
+    sub: "",
   },
 ];
 
@@ -53,15 +55,26 @@ const menuData = [
   getItem("Quản lý tài khoản", "9", <SolutionOutlined />),
 ];
 
-export default ({ smallScreen }) => {
+const SiderBar = ({ smallScreen }) => {
   const router = useRouter();
   const dispatch = useDispatch();
   const siderPicker = useSelector((state) => state.reducers.sider);
 
+  useEffect(() => {
+    const path = router?.pathname;
+    const currentRoute = routesData.find((r) => r.route === path);
+    const key = currentRoute?.key;
+    const sub = currentRoute?.sub;
+
+    if (key) {
+      setSelectedKey([key]);
+      setOpenKey([sub]);
+    }
+  }, []);
+
   const handleSelectMenu = (e) => {
     const { key } = e;
     const route = routesData.find((r) => r.key === key)?.route;
-    console.log(route);
     if (route) {
       setSelectedKey([key]);
       router.push(route);
@@ -81,6 +94,7 @@ export default ({ smallScreen }) => {
   };
 
   const setOpenKey = (v) => {
+    console.log("🚀 - setOpenKey - v", v)
     if (v) {
       dispatch(addOpenKey(v));
     }
@@ -103,7 +117,7 @@ export default ({ smallScreen }) => {
         left: 0,
         top: 0,
         bottom: 0,
-        zIndex: 9999,
+        zIndex: 1010,
       }}
     >
       <div
@@ -134,3 +148,5 @@ export default ({ smallScreen }) => {
     </Sider>
   );
 };
+
+export default SiderBar;

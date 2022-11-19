@@ -48,3 +48,7 @@ a {
 .header-bar {
   padding: 0px 16px !important;
 }
+
+.ant-modal-wrap {
+  z-index: 1025 !important;
+}
