@@ -1,13 +1,18 @@
 import { Card, Typography, Table, Input } from "antd";
 const { Title } = Typography;
-import DrugOrderColumn from "components/ManageDrugOrder/DrugOrderColumn";
+import DrugOrderDetailColumn from "components/DrugOrderManagement/DrugOrderDetailColumn";
+import { useEffect, useState } from "react";
+import { useRouter } from "next/router";
 
-import UpdateSingleOrderModal from "components/ManageDrugOrder/UpdateSingleOrderModal";
-import { use, useState } from "react";
+export default function DrugOrderDetail() {
+  const [orderId, setOrderId] = useState("");
+  const router = useRouter();
 
-export default function ManageDrugOrder() {
-  const [showUpdateSingleOrderModal, setShowUpdateSingleOrderModal] =
-    useState(false);
+  useEffect(() => {
+    const orderId = router?.query?.oid;
+    setOrderId(orderId);
+  }, [router?.query?.oid]);
+
   const dataSource = [
     {
       key: "1",
@@ -27,7 +32,7 @@ export default function ManageDrugOrder() {
 
   return (
     <div>
-      <Title level={3}>Quản lý đơn hàng thuốc</Title>
+      {/* <Title level={3}>Quản lý đơn hàng thuốc</Title> */}
       <Card>
         <div
           style={{
@@ -37,8 +42,11 @@ export default function ManageDrugOrder() {
             alignItems: "center",
           }}
         >
-          <Title level={5}>Danh sách đơn hàng</Title>
-          <Input style={{ width: 300 }} placeholder={"Mã đơn hàng, tên dược"} />
+          <Title level={5}>{`Đơn hàng ${orderId}`}</Title>
+          <Input
+            style={{ width: 300 }}
+            placeholder={"Tên thuốc, mã thuốc, nhà cung cấp"}
+          />
         </div>
         <Table
           style={{ margingTop: 12 }}
@@ -53,21 +61,13 @@ export default function ManageDrugOrder() {
             y: 300,
           }}
           dataSource={dataSource}
-          columns={DrugOrderColumn({
-            openUpdateSingleOrderModal: () => {
-              setShowUpdateSingleOrderModal(true);
-            },
-          })}
+          columns={DrugOrderDetailColumn()}
           onChange={(e) => {
             console.log("🚀 - ManageDrugOrder - e", e);
             return;
           }}
         />
       </Card>
-      <UpdateSingleOrderModal
-        isShowUpdateSingleOrderModal={showUpdateSingleOrderModal}
-        closeUpdateSingleOrderModal={() => setShowUpdateSingleOrderModal(false)}
-      />
     </div>
   );
 }

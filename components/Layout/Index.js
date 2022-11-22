@@ -6,6 +6,7 @@ import useWindowSize from "hook/useWindowSize";
 import HeaderBar from "./HeaderBar";
 import DrawerSider from "./DrawerSider";
 import { CaretUpOutlined } from "@ant-design/icons";
+import Sign from './../Authorization/Sign'
 
 const { Content, Footer } = Layout;
 
@@ -28,19 +29,9 @@ const LayoutComponent = ({ children }) => {
     drawerSiderRef.current?.hide();
   };
 
-  const style = {
-    height: 40,
-    width: 40,
-    lineHeight: "40px",
-    borderRadius: 4,
-    backgroundColor: "#1088e9",
-    color: "#fff",
-    textAlign: "center",
-    fontSize: 14,
-  };
-
   return (
-    <div>
+   <Sign>
+     <div>
       <Layout style={{ minHeight: "100vh" }}>
         <SideBar smallScreen={size.smallScreen} />
         <Layout
@@ -84,6 +75,7 @@ const LayoutComponent = ({ children }) => {
         ></Button>
       </BackTop>
     </div>
+   </Sign>
   );
 };
 

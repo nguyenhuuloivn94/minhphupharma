@@ -1,12 +1,4 @@
 import { Layout, Menu, notification } from "antd";
-import {
-  DatabaseOutlined,
-  FolderOpenOutlined,
-  FileTextOutlined,
-  ShoppingCartOutlined,
-  MedicineBoxOutlined,
-  SolutionOutlined,
-} from "@ant-design/icons";
 import React, { useEffect, useState } from "react";
 import fontSize from "theme/fontSize";
 import color from "theme/color";
@@ -14,46 +6,9 @@ import { useRouter } from "next/router";
 import Styles from "./SideBar.module.css";
 import { useSelector, useDispatch } from "react-redux";
 import { addSelectedKey, addOpenKey } from "store/reducer/sider.reducer";
+import { menuRouterConfig, routerConfig } from "utils/constants";
 
 const { Sider } = Layout;
-
-function getItem(label, key, icon, children) {
-  return {
-    key,
-    icon,
-    children,
-    label,
-  };
-}
-
-const routesData = [
-  {
-    key: "1",
-    route: "/single-order",
-    sub: "sub1",
-  },
-  {
-    key: "3",
-    route: "/manage-drug-order",
-    sub: "",
-  },
-];
-
-const menuData = [
-  getItem("Bán thuốc", "sub1", <ShoppingCartOutlined />, [
-    getItem("Đơn lẻ", "1"),
-    getItem("Theo mẫu", "2"),
-  ]),
-  getItem("Quản lý đơn hàng", "3", <FolderOpenOutlined />),
-  getItem("Quản lý kho", "4", <DatabaseOutlined />),
-  getItem("Đơn thuốc mẫu", "5", <FileTextOutlined />),
-  getItem("Quản lý thuốc", "sub2", <MedicineBoxOutlined />, [
-    getItem("Danh mục", "6"),
-    getItem("Nhóm thuốc", "7"),
-    getItem("Đơn vị", "8"),
-  ]),
-  getItem("Quản lý tài khoản", "9", <SolutionOutlined />),
-];
 
 const SiderBar = ({ smallScreen }) => {
   const router = useRouter();
@@ -62,7 +17,7 @@ const SiderBar = ({ smallScreen }) => {
 
   useEffect(() => {
     const path = router?.pathname;
-    const currentRoute = routesData.find((r) => r.route === path);
+    const currentRoute = routerConfig().find((r) => r.route === path);
     const key = currentRoute?.key;
     const sub = currentRoute?.sub;
 
@@ -74,7 +29,7 @@ const SiderBar = ({ smallScreen }) => {
 
   const handleSelectMenu = (e) => {
     const { key } = e;
-    const route = routesData.find((r) => r.key === key)?.route;
+    const route = routerConfig().find((r) => r.key === key)?.route;
     if (route) {
       setSelectedKey([key]);
       router.push(route);
@@ -138,7 +93,7 @@ const SiderBar = ({ smallScreen }) => {
           style={{
             height: "100%",
           }}
-          items={menuData}
+          items={menuRouterConfig()}
           onSelect={handleSelectMenu}
           onOpenChange={(e) => {
             setOpenKey(e);
