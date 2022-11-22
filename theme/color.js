@@ -1,4 +1,4 @@
-export default {
+const color = {
   bg: "white",
   bgContent: "#f0f3f8",
   navyBlue: "#0665d0",
@@ -8,3 +8,4 @@ export default {
   red: "red",
   ghostWhite: "#f6f7fb",
 };
+export default color;

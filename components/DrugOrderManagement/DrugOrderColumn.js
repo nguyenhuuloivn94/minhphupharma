@@ -1,9 +1,12 @@
-import { Button, Tag } from "antd";
-import { EditOutlined } from "@ant-design/icons";
+import { Button, Space, Tag } from "antd";
+import { EditOutlined, EyeOutlined } from "@ant-design/icons";
 import color from "theme/color";
 import { formatMoney, formatDateWithMoment } from "utils/helperCenter";
 
-const OrderColumns = ({ openUpdateSingleOrderModal = () => {} }) => {
+const OrderColumns = ({
+  openUpdateSingleOrderModal = () => {},
+  goDetail = () => {},
+}) => {
   const columns = [
     {
       title: "STT",
@@ -97,15 +100,27 @@ const OrderColumns = ({ openUpdateSingleOrderModal = () => {} }) => {
     },
     {
       title: "",
-      width: 30,
+      width: 60,
       key: "action",
+      fixed: "right",
       render: () => {
         return (
-          <Button
-            onClick={() => openUpdateSingleOrderModal()}
-            type="ghost"
-            icon={<EditOutlined />}
-          ></Button>
+          <Space style={{ display: "flex", justifyContent: "space-around" }}>
+            <Button
+              type="text"
+              shape="round"
+              onClick={() => goDetail("123")}
+              icon={<EyeOutlined style={{ color: "blue" }} />}
+              title="Xem chi tiết"
+            ></Button>
+            <Button
+              shape="round"
+              onClick={() => openUpdateSingleOrderModal()}
+              type="text"
+              icon={<EditOutlined style={{ color: "green" }} />}
+              title="Cập nhật đơn hàng"
+            ></Button>
+          </Space>
         );
       },
     },

@@ -6,6 +6,7 @@ import OrderColumns from "./OrderColumn";
 import color from "theme/color";
 import { formatMoney } from "utils/helperCenter";
 import Styles from "./FormSingleOrder.module.css";
+import useWindowSize from "hook/useWindowSize";
 
 const dataSource = [
   {
@@ -34,10 +35,16 @@ const dataSource = [
 const handleChangeSwitch = () => {};
 
 export default function FormSingleOrder() {
+  const size = useWindowSize();
+  console.log("🚀 - FormSingleOrder - size.width < 500", size.width)
+
   return (
     <div>
       <Card>
-        <SelectPaging placeHolder="Tìm kiếm thuốc theo tên, mã, mã vạch" />
+        <SelectPaging
+          widthSelect={size.width < 600 ? "100%" : "50%"}
+          placeHolder="Tìm kiếm thuốc theo tên, mã, mã vạch"
+        />
       </Card>
       <Row gutter={[16, 16]} style={{ marginTop: 16 }}>
         <Col xs={24} lg={24} xl={12}>
@@ -56,7 +63,7 @@ export default function FormSingleOrder() {
               showSorterTooltip={false}
               dataSource={dataSource}
               scroll={{
-                x: '100%',
+                x: "100%",
               }}
               columns={OrderColumns()}
             />

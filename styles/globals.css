@@ -52,3 +52,7 @@ a {
 .ant-modal-wrap {
   z-index: 1025 !important;
 }
+
+.button-export-excel:hover {
+  border-color: #82b54b !important;
+}

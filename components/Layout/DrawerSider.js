@@ -3,52 +3,9 @@ import React, { useState, forwardRef, useImperativeHandle } from "react";
 import fontSize from "theme/fontSize";
 import color from "theme/color";
 import { useRouter } from "next/router";
-import {
-  DatabaseOutlined,
-  FolderOpenOutlined,
-  FileTextOutlined,
-  ShoppingCartOutlined,
-  MedicineBoxOutlined,
-  SolutionOutlined,
-} from "@ant-design/icons";
 import { useSelector, useDispatch } from "react-redux";
 import { addSelectedKey, addOpenKey } from "store/reducer/sider.reducer";
-
-function getItem(label, key, icon, children) {
-  return {
-    key,
-    icon,
-    children,
-    label,
-  };
-}
-
-const routesData = [
-  {
-    key: "1",
-    route: "/single-order",
-  },
-  {
-    key: "3",
-    route: "/manage-drug-order",
-  },
-];
-
-const menuData = [
-  getItem("Bán thuốc", "sub1", <ShoppingCartOutlined />, [
-    getItem("Đơn lẻ", "1"),
-    getItem("Theo mẫu", "2"),
-  ]),
-  getItem("Quản lý đơn hàng", "3", <FolderOpenOutlined />),
-  getItem("Quản lý kho", "4", <DatabaseOutlined />),
-  getItem("Đơn thuốc mẫu", "5", <FileTextOutlined />),
-  getItem("Quản lý thuốc", "sub2", <MedicineBoxOutlined />, [
-    getItem("Danh mục", "6"),
-    getItem("Nhóm thuốc", "7"),
-    getItem("Đơn vị", "8"),
-  ]),
-  getItem("Quản lý tài khoản", "9", <SolutionOutlined />),
-];
+import { menuRouterConfig, routerConfig } from "utils/constants";
 
 const DrawerSider = ({}, ref) => {
   const dispatch = useDispatch();
@@ -71,7 +28,7 @@ const DrawerSider = ({}, ref) => {
 
   const handleSelectMenu = (e) => {
     const { key } = e;
-    const route = routesData.find((r) => r.key === key)?.route;
+    const route = routerConfig().find((r) => r.key === key)?.route;
     if (route) {
       setSelectedKey([key]);
       router.push(route);
@@ -132,7 +89,7 @@ const DrawerSider = ({}, ref) => {
         style={{
           height: "100%",
         }}
-        items={menuData}
+        items={menuRouterConfig()}
         onSelect={handleSelectMenu}
         onOpenChange={(e) => {
           setOpenKey(e);
