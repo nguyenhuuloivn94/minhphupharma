@@ -28,6 +28,10 @@ a {
   }
 } */
 
+.h-stack-md > * + * {
+  margin-left: 1rem !important;
+}
+
 .ant-popover-arrow {
   display: none !important;
 }

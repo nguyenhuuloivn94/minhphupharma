@@ -2,10 +2,13 @@ import { Card, Typography, Table, Input, Select, Row, Col, Button } from "antd";
 import DrugInventoryColumn from "components/DrugInventoryManagement/DrugInventoryColumn";
 import { FileExcelOutlined, PlusOutlined } from "@ant-design/icons";
 import { useRouter } from "next/router";
+import ImportExceModal from "components/Common/ImportExceModal";
+import { useState } from "react";
 
 const { Title } = Typography;
 
 export default function DrugOrderManagement() {
+  const [isShowImportExceModal, setIsShowImportExceModal] = useState(false);
   const router = useRouter();
 
   const dataSource = [
@@ -85,6 +88,7 @@ export default function DrugOrderManagement() {
                   marginRight: 12,
                 }}
                 icon={<FileExcelOutlined />}
+                onClick={() => setIsShowImportExceModal(true)}
               >
                 Import Excel
               </Button>
@@ -136,6 +140,11 @@ export default function DrugOrderManagement() {
           }}
         />
       </Card>
+
+      <ImportExceModal
+        closeImportExceModal={() => setIsShowImportExceModal(false)}
+        isShowImportExceModal={isShowImportExceModal}
+      />
     </div>
   );
 }
