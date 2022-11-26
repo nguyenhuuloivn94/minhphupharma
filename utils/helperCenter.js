@@ -1,4 +1,4 @@
-import moment from "moment";
+import moment from "dayjs";
 
 export const formatMoney = (num = 0) => {
   return parseInt(num)

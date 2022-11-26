@@ -107,7 +107,7 @@ const ImportExceModal = ({
       title={<div style={{ color: "#054d9e" }}>Import Excel</div>}
       footer={null}
       width={1000}
-      bodyStyle={{ overflowX: "scroll", zIndex: 1024 }}
+      bodyStyle={{ overflowX: "hidden", zIndex: 1024 }}
       maskStyle={{ zIndex: 1024 }}
       style={{ top: 20, zIndex: 1024 }}
       onCancel={closeImportExceModal}

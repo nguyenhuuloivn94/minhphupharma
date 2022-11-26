@@ -6,7 +6,7 @@ import useWindowSize from "hook/useWindowSize";
 import HeaderBar from "./HeaderBar";
 import DrawerSider from "./DrawerSider";
 import { CaretUpOutlined } from "@ant-design/icons";
-import Sign from './../Authorization/Sign'
+import Sign from "./../Authorization/Sign";
 
 const { Content, Footer } = Layout;
 
@@ -30,29 +30,30 @@ const LayoutComponent = ({ children }) => {
   };
 
   return (
-   <Sign>
-     <div>
-      <Layout style={{ minHeight: "100vh" }}>
-        <SideBar smallScreen={size.smallScreen} />
-        <Layout
-          style={{
-            marginLeft: size.smallScreen ? 0 : 200,
-          }}
-        >
+    <Sign>
+      <div>
+        <Layout style={{ minHeight: "100vh" }}>
           <HeaderBar
             onOpenDrawSider={openDrawSider}
             onCloseDrawSider={closeDrawSider}
             smallScreen={size.smallScreen}
           />
-          <Content
+          <Layout
             style={{
-              margin: "24px 16px 0",
-              overflow: "initial",
-              backgroundColor: color.bgContent,
+              marginLeft: size.smallScreen ? 0 : 200,
             }}
           >
-            {children}
-          </Content>
+            <SideBar smallScreen={size.smallScreen} />
+            <Content
+              style={{
+                margin: "24px 16px 0",
+                overflow: "initial",
+                backgroundColor: color.bgContent,
+              }}
+            >
+              {children}
+            </Content>
+          </Layout>
           <Footer
             style={{
               backgroundColor: color.bg,
@@ -64,18 +65,17 @@ const LayoutComponent = ({ children }) => {
             </div>
           </Footer>
         </Layout>
-      </Layout>
 
-      <DrawerSider ref={drawerSiderRef} />
-      <BackTop>
-        <Button
-          shape="circle"
-          style={{ background: "rgba(0,0,0,0.3)", border: "none" }}
-          icon={<CaretUpOutlined style={{ color: "rgba(0,0,0,0.5)" }} />}
-        ></Button>
-      </BackTop>
-    </div>
-   </Sign>
+        <DrawerSider ref={drawerSiderRef} />
+        <BackTop>
+          <Button
+            shape="circle"
+            style={{ background: "rgba(0,0,0,0.3)", border: "none" }}
+            icon={<CaretUpOutlined style={{ color: "rgba(0,0,0,0.5)" }} />}
+          ></Button>
+        </BackTop>
+      </div>
+    </Sign>
   );
 };
 

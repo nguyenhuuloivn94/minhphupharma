@@ -3,12 +3,17 @@ import DrugInventoryColumn from "components/DrugInventoryManagement/DrugInventor
 import { FileExcelOutlined, PlusOutlined } from "@ant-design/icons";
 import { useRouter } from "next/router";
 import ImportExceModal from "components/Common/ImportExceModal";
+import ImportExportInventoryModal from "components/DrugInventoryManagement/ImportExportInventoryModal";
 import { useState } from "react";
 
 const { Title } = Typography;
 
 export default function DrugOrderManagement() {
   const [isShowImportExceModal, setIsShowImportExceModal] = useState(false);
+  const [
+    isShowImportExportInventoryModal,
+    setIsShowImportExportInventoryModal,
+  ] = useState(false);
   const router = useRouter();
 
   const dataSource = [
@@ -100,6 +105,7 @@ export default function DrugOrderManagement() {
                   marginRight: 12,
                 }}
                 icon={<PlusOutlined />}
+                onClick={() => setIsShowImportExportInventoryModal(true)}
               >
                 Nhập/Xuất Kho
               </Button>
@@ -144,6 +150,12 @@ export default function DrugOrderManagement() {
       <ImportExceModal
         closeImportExceModal={() => setIsShowImportExceModal(false)}
         isShowImportExceModal={isShowImportExceModal}
+      />
+      <ImportExportInventoryModal
+        closeImportExportInventoryModal={() =>
+          setIsShowImportExportInventoryModal(false)
+        }
+        isShowImportExportInventoryModal={isShowImportExportInventoryModal}
       />
     </div>
   );
