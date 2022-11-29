@@ -103,7 +103,7 @@ const ImportExceModal = ({
 
   return (
     <Modal
-      visible={isShowImportExceModal}
+      open={isShowImportExceModal}
       title={<div style={{ color: "#054d9e" }}>Import Excel</div>}
       footer={null}
       width={1000}

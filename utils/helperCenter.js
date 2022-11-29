@@ -7,6 +7,6 @@ export const formatMoney = (num = 0) => {
     .replace(/(\d)(?=(\d{3})+(?!\d))/g, "$1.");
 };
 
-export const formatDateWithMoment = (date, format) => {
+export const formatDateWithDayjs = (date, format) => {
   return date ? moment(date).format(format) : "---";
 };

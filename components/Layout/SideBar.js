@@ -30,7 +30,10 @@ const SiderBar = ({ smallScreen }) => {
   const handleSelectMenu = (e) => {
     const { key } = e;
     const route = routerConfig().find((r) => r.key === key)?.route;
+    const path = router?.pathname;
+    const currentRoute = routerConfig().find((r) => r.route === path);
     if (route) {
+      if (route === currentRoute?.route) return;
       setSelectedKey([key]);
       router.push(route);
     } else {
@@ -49,7 +52,7 @@ const SiderBar = ({ smallScreen }) => {
   };
 
   const setOpenKey = (v) => {
-    console.log("🚀 - setOpenKey - v", v)
+    console.log("🚀 - setOpenKey - v", v);
     if (v) {
       dispatch(addOpenKey(v));
     }
@@ -94,7 +97,7 @@ const SiderBar = ({ smallScreen }) => {
             height: "100%",
           }}
           items={menuRouterConfig()}
-          onSelect={handleSelectMenu}
+          onClick={handleSelectMenu}
           onOpenChange={(e) => {
             setOpenKey(e);
           }}

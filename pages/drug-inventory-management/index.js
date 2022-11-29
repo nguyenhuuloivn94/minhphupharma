@@ -151,12 +151,14 @@ export default function DrugOrderManagement() {
         closeImportExceModal={() => setIsShowImportExceModal(false)}
         isShowImportExceModal={isShowImportExceModal}
       />
-      <ImportExportInventoryModal
-        closeImportExportInventoryModal={() =>
-          setIsShowImportExportInventoryModal(false)
-        }
-        isShowImportExportInventoryModal={isShowImportExportInventoryModal}
-      />
+
+      {isShowImportExportInventoryModal ? (
+        <ImportExportInventoryModal
+          closeImportExportInventoryModal={() =>
+            setIsShowImportExportInventoryModal(false)
+          }
+        />
+      ) : null}
     </div>
   );
 }

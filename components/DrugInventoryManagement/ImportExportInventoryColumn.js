@@ -3,27 +3,24 @@ import { EditOutlined, EyeOutlined } from "@ant-design/icons";
 import color from "theme/color";
 import { formatMoney, formatDateWithDayjs } from "utils/helperCenter";
 
-const InventoryColumns = ({
-  openUpdateSingleOrderModal = () => {},
-  goDetail = () => {},
-}) => {
+const ImportExportInventoryColumn = () => {
   const columns = [
     {
-      title: "STT",
+      title: "#",
       key: "key",
       width: 30,
       render: (_, row, index) => index + 1,
     },
     {
-      title: "Nhân viên",
+      title: "Tên thuốc",
       dataIndex: "name",
       key: "name",
-      width: 80,
+      width: 100,
       render: (text) => <a>{text}</a>,
     },
     {
-      title: "Mã đơn hàng",
-      dataIndex: "age",
+      title: "Đơn vị",
+      dataIndex: "unit",
       width: 80,
       key: "age",
       //   render: () => {
@@ -31,8 +28,8 @@ const InventoryColumns = ({
       //   },
     },
     {
-      title: "Số chứng từ",
-      dataIndex: "address",
+      title: "Đơn giá",
+      dataIndex: "unitPrice",
       width: 80,
       key: "address",
       //   render: () => {
@@ -40,8 +37,8 @@ const InventoryColumns = ({
       //   },
     },
     {
-      title: "Loại đơn hàng",
-      dataIndex: "unitPrice",
+      title: "Số lượng",
+      dataIndex: "quant",
       width: 50,
       key: "address",
       render: () => {
@@ -49,8 +46,22 @@ const InventoryColumns = ({
       },
     },
     {
-      title: "Giá trị đơn hàng(VNĐ)",
+      title: "Hạn dùng",
       dataIndex: "total",
+      sorter: (a, b) => a.address.length - b.address.length,
+      width: 80,
+      key: "address",
+      render: () => {
+        return (
+          <div style={{ color: color.tuna }}>
+            {formatDateWithDayjs((new Date(), "hh:mm DD/MM/YYYY"))}
+          </div>
+        );
+      },
+    },
+    {
+      title: "Số lô",
+      dataIndex: "lotNumber",
       sorter: (a, b) => a.address.length - b.address.length,
       width: 80,
       key: "address",
@@ -59,18 +70,8 @@ const InventoryColumns = ({
       },
     },
     {
-      title: "Số tiền chiết khấu(VNĐ)",
-      dataIndex: "total",
-      sorter: (a, b) => a.address.length - b.address.length,
-      width: 80,
-      key: "address",
-      render: () => {
-        return <div style={{ color: color.tuna }}>{formatMoney(12312323)}</div>;
-      },
-    },
-    {
-      title: "Trạng thái",
-      dataIndex: "total",
+      title: "Chiết khấu",
+      dataIndex: "discount",
       width: 80,
       key: "address",
       render: () => {
@@ -86,7 +87,7 @@ const InventoryColumns = ({
       },
     },
     {
-      title: "Ngày tạo",
+      title: "Total",
       dataIndex: "total",
       width: 80,
       key: "address",
@@ -98,27 +99,8 @@ const InventoryColumns = ({
         );
       },
     },
-    {
-      title: "",
-      width: 30,
-      key: "action",
-      fixed: "right",
-      render: () => {
-        return (
-          <Space style={{ display: "flex", justifyContent: "space-around" }}>
-            <Button
-              type="text"
-              shape="round"
-              onClick={() => goDetail("123")}
-              icon={<EyeOutlined style={{ color: "blue" }} />}
-              title="Xem chi tiết"
-            ></Button>
-          </Space>
-        );
-      },
-    },
   ];
   return columns;
 };
 
-export default InventoryColumns;
+export default ImportExportInventoryColumn;

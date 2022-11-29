@@ -1,11 +1,10 @@
-import { BackTop, Button, Layout } from "antd";
+import { FloatButton, Layout } from "antd";
 import React, { useEffect, useRef } from "react";
 import SideBar from "./SideBar";
 import color from "theme/color";
 import useWindowSize from "hook/useWindowSize";
 import HeaderBar from "./HeaderBar";
 import DrawerSider from "./DrawerSider";
-import { CaretUpOutlined } from "@ant-design/icons";
 import Sign from "./../Authorization/Sign";
 
 const { Content, Footer } = Layout;
@@ -67,13 +66,7 @@ const LayoutComponent = ({ children }) => {
         </Layout>
 
         <DrawerSider ref={drawerSiderRef} />
-        <BackTop>
-          <Button
-            shape="circle"
-            style={{ background: "rgba(0,0,0,0.3)", border: "none" }}
-            icon={<CaretUpOutlined style={{ color: "rgba(0,0,0,0.5)" }} />}
-          ></Button>
-        </BackTop>
+        <FloatButton.BackTop />
       </div>
     </Sign>
   );

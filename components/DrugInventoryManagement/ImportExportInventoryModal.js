@@ -8,16 +8,22 @@ import {
   Input,
   InputNumber,
   DatePicker,
+  Button,
+  Table,
 } from "antd";
 import SelectPaging from "components/Common/SelectPaging";
+import {
+  ScanOutlined,
+  PlusOutlined,
+  SaveOutlined,
+  UnorderedListOutlined,
+} from "@ant-design/icons";
 import dayjs from "dayjs";
 import { useMemo, Fragment, useEffect, useState } from "react";
 import fontSize from "theme/fontSize";
+import ImportExportInventoryColumn from "./ImportExportInventoryColumn";
 
-const ImportExportInventoryModal = ({
-  isShowImportExportInventoryModal,
-  closeImportExportInventoryModal,
-}) => {
+const ImportExportInventoryModal = ({ closeImportExportInventoryModal }) => {
   const [form] = Form.useForm();
 
   const handleSubmit = () => {};
@@ -29,15 +35,31 @@ const ImportExportInventoryModal = ({
       label: i.toString(36) + i,
     });
   }
-  
+
+  const dataSource = [
+    {
+      key: "1",
+      name: "John Brown",
+      age: 32,
+      address: "New York No. 1 Lake Park",
+      tags: ["nice", "developer"],
+    },
+    {
+      key: "2",
+      name: "Jim Green",
+      age: 42,
+      address: "London No. 1 Lake Park",
+      tags: ["loser"],
+    },
+  ];
   return (
     <Modal
       centered={true}
-      open={isShowImportExportInventoryModal}
+      open={true}
       title={`Thông tin nhập xuất kho`}
       onCancel={closeImportExportInventoryModal}
       footer={null}
-      bodyStyle={{ overflowX: "hidden", height: 800, zIndex: 1024 }}
+      bodyStyle={{ overflowX: "hidden", height: 1000, zIndex: 1024 }}
       maskStyle={{ zIndex: 1024 }}
       style={{ zIndex: 1024 }}
       width={"90%"}
@@ -251,12 +273,10 @@ const ImportExportInventoryModal = ({
               <DatePicker format={"DD/MM/YYYY"} style={{ width: "100%" }} />
             </Form.Item>
           </Col>
-        </Row>
-        <div style={{ marginTop: 24, fontSize: fontSize.medium }}>
-          Thông tin thuốc
-        </div>
-        <Divider style={{ margin: "12px 0px" }} />
-        <Row gutter={[16, 16]}>
+          <Col xs={24} sm={24} lg={24} xxl={24}>
+            <div style={{ fontSize: fontSize.medium }}>Thông tin thuốc</div>
+            <Divider style={{ margin: "12px 0px 0px 0px" }} />
+          </Col>
           <Col xs={24} sm={24} lg={8} xxl={6}>
             <Form.Item
               label={"Tên thuốc"}
@@ -432,6 +452,58 @@ const ImportExportInventoryModal = ({
                 controls={false}
               />
             </Form.Item>
+          </Col>
+          <Col xs={24} sm={24} lg={24} xxl={24}>
+            <div style={{ textAlign: "right" }}>
+              <Button
+                style={{ color: "green", borderColor: "green" }}
+                icon={<ScanOutlined />}
+                type={"default"}
+              >
+                Quét mã
+              </Button>
+              <Button
+                style={{
+                  margin: "0px 10px",
+                  color: "orange",
+                  borderColor: "orange",
+                }}
+                icon={<PlusOutlined />}
+                type={"default"}
+                htmlType="submit"
+              >
+                Thêm
+              </Button>
+              <Button
+                style={{ color: "blue", borderColor: "blue" }}
+                icon={<SaveOutlined />}
+                type={"default"}
+              >
+                Xác nhận
+              </Button>
+            </div>
+          </Col>
+          <Col xs={24} sm={24} lg={24} xxl={24}>
+            <div>
+              <UnorderedListOutlined /> Danh sách đã thêm
+            </div>
+          </Col>
+          <Col xs={24} sm={24} lg={24} xxl={24}>
+            <Table
+              style={{ margingTop: 12 }}
+              showSorterTooltip={false}
+              pagination={{
+                showSizeChanger: true,
+                current: 1,
+                pageSize: 10,
+              }}
+              scroll={{
+                x: 1500,
+                y: 300,
+              }}
+              dataSource={dataSource}
+              columns={ImportExportInventoryColumn()}
+            />
           </Col>
         </Row>
       </Form>

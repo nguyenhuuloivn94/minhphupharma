@@ -1,7 +1,7 @@
 import { Button, Space, Tag } from "antd";
 import { EditOutlined, EyeOutlined } from "@ant-design/icons";
 import color from "theme/color";
-import { formatMoney, formatDateWithMoment } from "utils/helperCenter";
+import { formatMoney, formatDateWithDayjs } from "utils/helperCenter";
 
 const OrderColumns = ({
   openUpdateSingleOrderModal = () => {},
@@ -93,7 +93,7 @@ const OrderColumns = ({
       render: () => {
         return (
           <div style={{ color: color.tuna }}>
-            {formatDateWithMoment(new Date(), "hh:mm DD/MM/YYYY")}
+            {formatDateWithDayjs(new Date(), "hh:mm DD/MM/YYYY")}
           </div>
         );
       },

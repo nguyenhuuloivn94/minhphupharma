@@ -53,6 +53,11 @@ export function routerConfig() {
       route: "/drug-inventory-management",
       sub: "",
     },
+    {
+      key: "5",
+      route: "/drug-sample-management",
+      sub: "",
+    },
   ];
   return routesData;
 }
